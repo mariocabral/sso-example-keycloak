@@ -19,18 +19,25 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <parent>
         <artifactId>keycloak-examples-parent</artifactId>
-        <groupId>org.keycloak</groupId>
-        <version>12.0.0-SNAPSHOT</version>
+        <groupId>com.github.keycloak.keycloak</groupId>
+        <version>11.0.2</version>
     </parent>
 
-    <name>Themes Examples</name>
+    <name>SSO Themes Example</name>
     <description/>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>keycloak-example-themes</artifactId>
+    <artifactId>sso-keycloak-example-themes</artifactId>
     <packaging>jar</packaging>
 
     <build>
-        <finalName>keycloak-example-themes</finalName>
+        <finalName>sso-keycloak-example-themes</finalName>
     </build>
+
+    <repositories>
+		<repository>
+		    <id>jitpack.io</id>
+		    <url>https://jitpack.io</url>
+		</repository>
+	</repositories>
 </project>
