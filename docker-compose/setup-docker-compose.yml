@@ -1,0 +1,45 @@
+version: '3'
+
+volumes:
+  postgres_data:
+    driver: local
+
+services:
+  keycloak_db:
+    image: 'postgres:13.0-alpine'
+    container_name: keycloak_db
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
+    restart: 'always'
+    # ports:
+    #   - 5432:5432
+    environment:
+      POSTGRES_USER: keycloak
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: keycloak
+      POSTGRES_HOST: postgres
+
+  keycloak:
+    image: jboss/keycloak:11.0.2
+    container_name: keycloak
+    environment:
+      DB_VENDOR: postgres
+      DB_ADDR: keycloak_db
+      DB_PORT: 5432
+      DB_DATABASE: keycloak
+      DB_USER: keycloak
+      DB_PASSWORD: password
+      KEYCLOAK_LOGLEVEL: DEBUG
+      JGROUPS_DISCOVERY_PROTOCOL: JDBC_PING
+      JGROUPS_DISCOVERY_PROPERTIES: datasource_jndi_name=java:jboss/datasources/KeycloakDS,info_writer_sleep_time=500,initialize_sql="CREATE TABLE IF NOT EXISTS JGROUPSPING ( own_addr varchar(200) NOT NULL, cluster_name varchar(200) NOT NULL, created timestamp default current_timestamp, ping_data BYTEA, constraint PK_JGROUPSPING PRIMARY KEY (own_addr, cluster_name))"
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: Pa55w0rd
+      KEYCLOAK_IMPORT: /tmp/keycloack-demo.json
+    volumes:
+      - ./keycloack/deployments:/opt/jboss/keycloak/standalone/deployments
+      - ./keycloack/configuration/standalone.xml:/opt/jboss/keycloak/standalone/configuration/standalone.xml
+      - ./keycloack/sso-example/keycloack-demo.json:/tmp/keycloack-demo.json
+    depends_on:
+      - keycloak_db
+    ports:
+     - 8080:8080
