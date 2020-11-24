@@ -1,12 +1,6 @@
 {
     "themes": [{
-        "name" : "address",
-        "types": [ "admin", "account", "login" ]
-    }, {
-        "name" : "logo-example",
+        "name" : "sso-example",
         "types": [ "admin", "account", "login", "welcome" ]
-    }, {
-        "name" : "sunrise",
-        "types": [ "login" ]
     }]
 }
