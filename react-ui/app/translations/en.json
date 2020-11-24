@@ -1,1 +1,4 @@
-[]
+{
+  "app.containers.HomePage.header": "Welcome!",
+  "app.containers.NotFoundPage.header": "This is the NotFoundPage container!"
+}

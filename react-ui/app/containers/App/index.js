@@ -15,14 +15,28 @@ import NotFoundPage from 'containers/NotFoundPage/Loadable';
 
 import GlobalStyle from '../../global-styles';
 
+import { useKeycloak } from '@react-keycloak/web';
+
 export default function App() {
-  return (
-    <div>
-      <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Route component={NotFoundPage} />
-      </Switch>
-      <GlobalStyle />
-    </div>
-  );
+  const {keycloak, initialized} = useKeycloak();
+  if (!initialized) {
+      console.log('keycloak loading...')
+      return (<div>Loading...</div>);
+  }
+  console.log('keycloak loaded...')
+  if (initialized && ! keycloak.authenticated){
+      console.log('keycloak call login...')
+      keycloak.login()
+  }
+  if (initialized && keycloak.authenticated){
+      return (
+        <div>
+          <Switch>
+            <Route exact path="/" component={HomePage} />
+            <Route component={NotFoundPage} />
+          </Switch>
+          <GlobalStyle />
+        </div>
+      );
+    }
 }

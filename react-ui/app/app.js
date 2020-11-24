@@ -16,6 +16,8 @@ import { ConnectedRouter } from 'connected-react-router';
 import history from 'utils/history';
 import 'sanitize.css/sanitize.css';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 // Import root app
 import App from 'containers/App';
 
@@ -33,20 +35,41 @@ import configureStore from './configureStore';
 // Import i18n messages
 import { translationMessages } from './i18n';
 
+import { ReactKeycloakProvider } from '@react-keycloak/web'
+import config from './config'
+import keycloak from './auth/keycloak'
+
+const eventLogger = (event, error) => {
+  console.log('onKeycloakEvent')
+}
+  
+const tokenLogger = (tokens) => {
+  console.log('onKeycloakTokens')
+}
+
+
 // Create redux store with history
 const initialState = {};
 const store = configureStore(initialState, history);
 const MOUNT_NODE = document.getElementById('app');
 
+
 const render = messages => {
   ReactDOM.render(
-    <Provider store={store}>
-      <LanguageProvider messages={messages}>
-        <ConnectedRouter history={history}>
-          <App />
-        </ConnectedRouter>
-      </LanguageProvider>
-    </Provider>,
+    <ReactKeycloakProvider
+    authClient={keycloak}
+    initConfig={config.keycloakInit}
+    onEvent={eventLogger}
+    onTokens={tokenLogger}
+    >
+      <Provider store={store}>
+        <LanguageProvider messages={messages}>
+          <ConnectedRouter history={history}>
+            <App />
+          </ConnectedRouter>
+        </LanguageProvider>
+      </Provider>
+    </ReactKeycloakProvider>,
     MOUNT_NODE,
   );
 };

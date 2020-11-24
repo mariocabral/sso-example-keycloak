@@ -1,6 +1,6 @@
 {
   "id": "SSO-Example",
-  "realm": "SSO-Example",
+  "realm": "sso-example",
   "displayName": "SSO Example",
   "notBefore": 0,
   "revokeRefreshToken": false,
@@ -454,7 +454,7 @@
       "clientId": "account",
       "name": "${client_account}",
       "rootUrl": "${authBaseUrl}",
-      "baseUrl": "/realms/SSO-Example/account/",
+      "baseUrl": "/realms/sso-example/account/",
       "surrogateAuthRequired": false,
       "enabled": true,
       "alwaysDisplayInConsole": false,
@@ -465,7 +465,7 @@
         "manage-account"
       ],
       "redirectUris": [
-        "/realms/SSO-Example/account/*"
+        "/realms/sso-example/account/*"
       ],
       "webOrigins": [],
       "notBefore": 0,
@@ -731,14 +731,14 @@
       "clientId": "security-admin-console",
       "name": "${client_security-admin-console}",
       "rootUrl": "${authAdminUrl}",
-      "baseUrl": "/admin/SSO-Example/console/",
+      "baseUrl": "/admin/sso-example/console/",
       "surrogateAuthRequired": false,
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
       "secret": "**********",
       "redirectUris": [
-        "/admin/SSO-Example/console/*"
+        "/admin/sso-example/console/*"
       ],
       "webOrigins": [
         "+"
@@ -1458,24 +1458,8 @@
   },
   "internationalizationEnabled": true,
   "supportedLocales": [
-    "de",
-    "no",
-    "ru",
-    "sv",
-    "pt-BR",
-    "lt",
     "en",
-    "it",
-    "fr",
-    "zh-CN",
-    "es",
-    "cs",
-    "ja",
-    "sk",
-    "pl",
-    "ca",
-    "nl",
-    "tr"
+    "es"
   ],
   "defaultLocale": "en",
   "authenticationFlows": [
