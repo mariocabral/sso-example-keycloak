@@ -38,7 +38,7 @@ Users available in the demo:
 
 Demo 1: Login
 
-```
+```gherkin
 Given in a tab access to react-ui
 And in another tab access to vue-ui
 When select one ui and login
@@ -48,7 +48,7 @@ Then the second ui was already logged
 
 Demo 2: Logout
 
-```
+```gherkin
 Given in a tab access to react-ui
 And in another tab access to vue-ui
 And some user is already logged
