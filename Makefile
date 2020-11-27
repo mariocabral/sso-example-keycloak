@@ -1,4 +1,4 @@
-.PHONY: install-react install-vue build-theme setup-env start stop build-dockers lint-docker
+.PHONY: install-react install-vue build-theme setup-env start stop build-dockers lint-docker setup
 
 
 
@@ -25,10 +25,13 @@ start:
 stop:
 	cd docker-compose; docker-compose stop
 
-build-dockers:
+build-dockers: lint-docker
 	cd vue-ui; docker build -t mcabral/sso-example-vue-ui:latest .
 	cd react-ui; docker build -t mcabral/sso-example-react-ui:latest .
 
 lint-docker:
 	docker run --rm -i hadolint/hadolint < vue-ui/Dockerfile
 	docker run --rm -i hadolint/hadolint < react-ui/Dockerfile
+
+
+setup: build-dockers build-theme setup-env
